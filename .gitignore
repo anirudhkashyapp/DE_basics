@@ -1,0 +1,18 @@
+# Database file - don't push actual data
+weather.db
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment (if you create one later)
+venv/
+.env
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
