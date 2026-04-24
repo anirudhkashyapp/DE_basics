@@ -9,7 +9,7 @@ params = {
     "longitude": 77.59,
     "daily": "temperature_2m_max,temperature_2m_min,precipitation_sum",
     "timezone": "Asia/Kolkata",
-    "past_days": 7          # last 7 days of data
+    "past_days": 30        # last 30 days of data
 }
 
 response = requests.get(url, params=params)
