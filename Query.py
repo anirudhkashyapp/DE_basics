@@ -27,3 +27,12 @@ df3 = pd.read_sql("""
 """, engine)
 print("\n--- Average Temperatures ---")
 print(df3)
+
+df4 = pd.read_sql("""
+    SELECT date, precipitation 
+    FROM bengaluru_weather 
+    ORDER BY precipitation DESC 
+    LIMIT 1
+""", engine)
+print("\n--- Rainiest Day ---")
+print(df4)
