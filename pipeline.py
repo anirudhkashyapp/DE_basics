@@ -21,18 +21,12 @@ def fetch_weather(city):
     response = requests.get(url, params=params)
     data = response.json()
 
-    df = pd.DataFrame({
-        "city": city["name"],
-        "date": data["daily"]["time"],
-        "temp_max": data["daily"]["temperature_2m_max"],
-        "temp_min": data["daily"]["temperature_2m_min"],
-        "precipitation": data["daily"]["precipitation_sum"]
-    })
-    return df
+  # Create a cities reference table
+cities_info = pd.DataFrame({
+    "city": ["Bengaluru", "Mumbai"],
+    "state": ["Karnataka", "Maharashtra"],
+    "population": [13000000, 20000000]
+})
 
-all_data = pd.concat([fetch_weather(city) for city in cities])
-
-all_data.to_sql("weather", engine, if_exists="replace", index=False)
-
-print("Data loaded for all cities!")
-print(all_data.head(10))
+cities_info.to_sql("cities", engine, if_exists="replace", index=False)
+print("Cities table loaded!")
