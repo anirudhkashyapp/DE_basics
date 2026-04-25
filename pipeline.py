@@ -6,7 +6,8 @@ engine = create_engine("sqlite:///weather.db")
 
 cities = [
     {"name": "Bengaluru", "latitude": 12.97, "longitude": 77.59},
-    {"name": "Mumbai", "latitude": 19.07, "longitude": 72.87}
+    {"name": "Mumbai", "latitude": 19.07, "longitude": 72.87},
+    {"name": "Delhi", "latitude": 28.61, "longitude": 77.21}
 ]
 
 def fetch_weather(city):
@@ -21,11 +22,24 @@ def fetch_weather(city):
     response = requests.get(url, params=params)
     data = response.json()
 
-  # Create a cities reference table
+    df = pd.DataFrame({
+        "city": city["name"],
+        "date": data["daily"]["time"],
+        "temp_max": data["daily"]["temperature_2m_max"],
+        "temp_min": data["daily"]["temperature_2m_min"],
+        "precipitation": data["daily"]["precipitation_sum"]
+    })
+    return df
+
+all_data = pd.concat([fetch_weather(city) for city in cities])
+all_data.to_sql("weather", engine, if_exists="replace", index=False)
+print("Weather data loaded!")
+print(all_data.head(10))
+
 cities_info = pd.DataFrame({
-    "city": ["Bengaluru", "Mumbai"],
-    "state": ["Karnataka", "Maharashtra"],
-    "population": [13000000, 20000000]
+    "city": ["Bengaluru", "Mumbai", "Delhi"],
+    "state": ["Karnataka", "Maharashtra", "Delhi"],
+    "population": [13000000, 20000000, 33000000]
 })
 
 cities_info.to_sql("cities", engine, if_exists="replace", index=False)
