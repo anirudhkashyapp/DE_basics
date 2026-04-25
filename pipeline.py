@@ -7,7 +7,8 @@ engine = create_engine("sqlite:///weather.db")
 cities = [
     {"name": "Bengaluru", "latitude": 12.97, "longitude": 77.59},
     {"name": "Mumbai", "latitude": 19.07, "longitude": 72.87},
-    {"name": "Delhi", "latitude": 28.61, "longitude": 77.21}
+    {"name": "Delhi", "latitude": 28.61, "longitude": 77.21},
+    {"name": "Chennai", "latitude": 13.08, "longitude": 80.27}
 ]
 
 def fetch_weather(city):
@@ -37,9 +38,9 @@ print("Weather data loaded!")
 print(all_data.head(10))
 
 cities_info = pd.DataFrame({
-    "city": ["Bengaluru", "Mumbai", "Delhi"],
-    "state": ["Karnataka", "Maharashtra", "Delhi"],
-    "population": [13000000, 20000000, 33000000]
+    "city": ["Bengaluru", "Mumbai", "Delhi", "Chennai"],
+    "state": ["Karnataka", "Maharashtra", "Delhi", "Tamil Nadu"],
+    "population": [13000000, 20000000, 33000000, 12000000]
 })
 
 cities_info.to_sql("cities", engine, if_exists="replace", index=False)
