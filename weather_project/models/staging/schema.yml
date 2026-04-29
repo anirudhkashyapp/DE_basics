@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_weather
+    description: "Cleaned weather data for Indian cities"
+    columns:
+      - name: city
+        description: "Name of the city"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Bengaluru', 'Mumbai', 'Delhi', 'Chennai']
+      - name: date
+        description: "Date of the weather reading"
+        tests:
+          - not_null
+      - name: temp_max
+        description: "Maximum temperature in celsius"
+        tests:
+          - not_null
+      - name: precipitation
+        description: "Rainfall in mm"
+        tests:
+          - not_null
